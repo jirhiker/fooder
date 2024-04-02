@@ -13,59 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ===============================================================================
-import random
 from datetime import timedelta, datetime
 from rich.table import Table
 from rich.console import Console
 
-
-class Ingredient:
-    name: str = ""
-    amount: int = 0
-
-
-class Recipe:
-    ingredients: list = []
-    servings: int = 0
-
-
-Recipes = {'breakfast': [('Pancakes', 'American'),
-                         ('French Toast', 'American'),
-                         ('Yougurt', 'American'),
-                         ('Cereal', 'American'), ],
-
-           'lunch': [('Taco Salad', 'Mexican'),
-                     ('Coldcuts', 'American'),
-                     ('Pasta Salad', 'Italian')],
-
-           'dinner': [('Tacos', 'Mexican'),
-                      ('Pizza', 'American'),
-                      ('Pasta', 'Italian')]}
-
-
-class Meal:
-    recipes: list = []
-    day_idx: int = 0
-    name: str = ""
-    style: str = ""
-
-    def __init__(self, kind, datetime, day_idx):
-        self.kind = kind
-        self.datetime = datetime
-        self.day_idx = day_idx
-
-    def generate(self, plan):
-        count = 0
-        recipes = Recipes[self.kind]
-        while 1:
-            self.name, self.style = random.choice(recipes)
-            if plan.validate(self) or count > len(recipes) :
-                break
-            count += 1
+from fooder.meal import Meal
 
 
 class Plan:
     meals: list = []
+
     def __init__(self, start_datetime=None, end_datetime=None):
         self.start_datetime = start_datetime
         self.end_datetime = end_datetime
@@ -82,7 +39,6 @@ class Plan:
         console = Console()
         console.print(f"Start Date/Time: {self.start_datetime}")
         console.print(f"End Date/Time  : {self.end_datetime}")
-
 
         table = Table(title="Meal Plan")
         table.add_column("Kind")

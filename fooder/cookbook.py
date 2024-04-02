@@ -13,18 +13,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ===============================================================================
+from fooder.recipe import Recipe
 
-Recipes = {'breakfast': [('Pancakes', 'American'),
-                         ('French Toast', 'American'),
-                         ('Yougurt', 'American'),
-                         ('Cereal', 'American'), ],
+Recipes = {'breakfast': [Recipe('Pancakes',
+                                'American',
+                                ['flour', 'sugar', 'baking powder', 'milk', 'eggs']),
+                         Recipe('French Toast', 'American',
+                                ['bread', 'eggs', 'milk', 'cinnamon']),
+                         Recipe('Yougurt', 'American',
+                                ['yogurt', 'granola']),
+                         Recipe('Cereal', 'American',
+                                ['cereal', 'milk']), ],
 
-           'lunch': [('Taco Salad', 'Mexican'),
-                     ('Coldcuts', 'American'),
-                     ('Pasta Salad', 'Italian')],
+           'lunch': [Recipe('Taco Salad', 'Mexican',
+                            ['lettuce', 'tomato', 'cheese', 'taco meat']),
+                     Recipe('Coldcuts', 'American',
+                            ['bread', 'meat', 'cheese', 'lettuce', 'tomato']),
+                     Recipe('Pasta Salad', 'Italian',
+                            ['pasta', 'tomato', 'cheese', 'lettuce']),],
 
-           'dinner': [('Tacos', 'Mexican'),
-                      ('Pizza', 'American'),
-                      ('Pasta', 'Italian')]}
+           'dinner': [Recipe('Tacos', 'Mexican',
+                             ['taco meat', 'lettuce', 'tomato', 'cheese']),
+                      Recipe('Pizza', 'American',
+                             ['dough', 'sauce', 'cheese', 'toppings']),
+                      Recipe('Pasta', 'Italian',
+                             ['pasta', 'sauce', 'cheese']),],}
 
 # ============= EOF =============================================

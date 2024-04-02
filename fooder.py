@@ -13,11 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ===============================================================================
+from collections import Counter
 from datetime import timedelta, datetime
 from rich.table import Table
 from rich.console import Console
-
 from fooder.meal import Meal
+
+console = Console()
 
 
 class Plan:
@@ -35,8 +37,28 @@ class Plan:
 
         return self.meals[-3].style != meal.style
 
-    def report(self):
-        console = Console()
+    def shopping_list(self):
+        pass
+
+    def index(self):
+        """generate an appropriate index for the plan"""
+        table = Table(title="Index")
+        table.add_column("Item")
+        table.add_column("Count")
+        table.add_column("Location")
+
+        counter = Counter()
+        for meal in self.meals:
+            for recipe in meal.recipes:
+                for ingredient in recipe.ingredients:
+                    counter[ingredient.name] += 1
+
+        for k, v in sorted(counter.items(), key=lambda x: x[0]):
+            table.add_row(k, str(v), "Pantry")
+        console.print(table)
+
+    def summary(self):
+
         console.print(f"Start Date/Time: {self.start_datetime}")
         console.print(f"End Date/Time  : {self.end_datetime}")
 
@@ -87,7 +109,10 @@ class Fooder:
             meal.generate(plan)
             plan.meals.append(meal)
 
-        plan.report()
+        plan.summary()
+
+        plan.shopping_list()
+        plan.index()
 
 
 if __name__ == '__main__':

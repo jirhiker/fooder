@@ -24,5 +24,7 @@ class Ingredient:
     is_peanut_free: bool = False
     is_pescatarian: bool = False
 
+    def __init__(self, name):
+        self.name = name
 
 # ============= EOF =============================================

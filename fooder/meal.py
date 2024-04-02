@@ -32,9 +32,13 @@ class Meal:
     def generate(self, plan):
         count = 0
         recipes = Recipes[self.kind]
+        self.recipes = []
         while 1:
-            self.name, self.style = random.choice(recipes)
+            r = random.choice(recipes)
+            self.name = r.name
+            self.style = r.style
             if plan.validate(self) or count > len(recipes):
+                self.recipes.append(r)
                 break
             count += 1
 # ============= EOF =============================================

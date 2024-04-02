@@ -13,8 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ===============================================================================
+from fooder.ingredient import Ingredient
+
+
 class Recipe:
     ingredients: list = []
     servings: int = 0
 
+    def __init__(self, name, style, ingredients):
+        self.name = name
+        self.style = style
+        self.ingredients = [Ingredient(i) for i in ingredients]
 # ============= EOF =============================================
